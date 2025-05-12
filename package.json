@@ -1,0 +1,17 @@
+{
+  "name": "chap-chap-bot",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp pour les rechargements",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start:confirmation": "node bot_confirmation.js",
+    "start:all": "concurrently \"npm run start:confirmation\" \"npm run start\""
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.5.0",
+    "@hapi/boom": "^10.0.1",
+    "pino": "^8.16.2",
+    "concurrently": "^8.2.2"
+  }
+} 
