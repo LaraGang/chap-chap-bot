@@ -453,9 +453,9 @@ _Cliquez sur un bouton ou envoyez votre montant:_`,
 // Fonction principale pour démarrer le bot
 async function demarrerBot() {
   try {
-    // Définir le chemin d'authentification en vérifiant si nous sommes sur Render (avec disque persistant)
-    // ou en local
-    const AUTH_PATH = process.env.RENDER ? '/var/data/chap-chap/auth_info_baileys' : 'auth_info_baileys';
+    // Sur le plan gratuit Render, nous devons utiliser un répertoire où nous avons accès en écriture
+    // Utiliser le répertoire tmp qui est disponible par défaut
+    const AUTH_PATH = process.env.RENDER ? '/tmp/auth_info_baileys' : 'auth_info_baileys';
     
     // S'assurer que le répertoire existe
     if (!fs.existsSync(AUTH_PATH)) {
