@@ -452,10 +452,19 @@ _Cliquez sur un bouton ou envoyez votre montant:_`,
 
 // Fonction principale pour démarrer le bot
 async function demarrerBot() {
-  console.log('🚀 Démarrage du bot principal...');
-  
   try {
-    const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
+    // Définir le chemin d'authentification en vérifiant si nous sommes sur Render (avec disque persistant)
+    // ou en local
+    const AUTH_PATH = process.env.RENDER ? '/var/data/chap-chap/auth_info_baileys' : 'auth_info_baileys';
+    
+    // S'assurer que le répertoire existe
+    if (!fs.existsSync(AUTH_PATH)) {
+      fs.mkdirSync(AUTH_PATH, { recursive: true });
+      console.log(`📝 Répertoire d'authentification créé : ${AUTH_PATH}`);
+    }
+    
+    // Gérer l'authentification
+    const { state, saveCreds } = await useMultiFileAuthState(AUTH_PATH);
     console.log('✅ État d\'authentification chargé');
     
     const sock = makeWASocket({
