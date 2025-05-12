@@ -1,8 +1,19 @@
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const { default: makeWASocket, DisconnectReason, useMultiFileAuthState, Browsers } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
-const fs = require('fs');
 const pino = require('pino');
+const fs = require('fs');
+const http = require('http');
 const config = require('./config');
+
+// Créer un simple serveur HTTP pour le ping UptimeRobot (pour éviter la mise en veille sur Render)
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Chap-Chap Bot en ligne');
+});
+
+server.listen(process.env.PORT || 3000, () => {
+  console.log(`🌐 Serveur HTTP démarré sur le port ${process.env.PORT || 3000}`);
+});
 
 // Configuration
 const ADMIN_NUMBER = config.ADMIN.jid;
