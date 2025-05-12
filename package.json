@@ -6,12 +6,16 @@
   "scripts": {
     "start": "node app.js",
     "start:confirmation": "node bot_confirmation.js",
-    "start:all": "concurrently \"npm run start:confirmation\" \"npm run start\""
+    "start:all": "concurrently \"npm run start:confirmation\" \"npm run start\"",
+    "start:render": "bash ./start.sh"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
     "@hapi/boom": "^10.0.1",
     "pino": "^8.16.2",
     "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
-} 
+}
